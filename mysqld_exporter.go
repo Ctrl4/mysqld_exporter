@@ -464,14 +464,6 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) {
 		}
 		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.engine_innodb_status")
 	}
-	if *collectHeartbeat {
-		scrapeTime = time.Now()
-		if err = collector.ScrapeHeartbeat(db, ch, collectHeartbeatDatabase, collectHeartbeatTable); err != nil {
-			log.Errorln("Error scraping for collect.heartbeat:", err)
-			e.scrapeErrors.WithLabelValues("collect.heartbeat").Inc()
-		}
-		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.heartbeat")
-	}
 	if *collectInnodbCompression {
 		scrapeTime = time.Now()
 		if err = collector.ScrapeInfoSchemaInnodbCompression(db, ch); err != nil {
@@ -479,6 +471,15 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) {
 			e.scrapeErrors.WithLabelValues("collect.info_schema.innodb_cmp").Inc()
 		}
 		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.info_schema.innodb_cmp")
+	}
+
+	if *collectHeartbeat {
+		scrapeTime = time.Now()
+		if err = collector.ScrapeHeartbeat(db, ch, collectHeartbeatDatabase, collectHeartbeatTable); err != nil {
+			log.Errorln("Error scraping for collect.heartbeat:", err)
+			e.scrapeErrors.WithLabelValues("collect.heartbeat").Inc()
+		}
+		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.heartbeat")
 	}
 }
 
