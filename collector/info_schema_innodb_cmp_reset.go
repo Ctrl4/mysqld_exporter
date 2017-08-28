@@ -23,7 +23,7 @@ const innodbCmpResetQuery = `
 
 var (
 	infoSchemaInnodbCmpResetPageSize = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "cmp_page_size"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_reset_page_size"),
 		"InnoDB page size for innodb_cmp_reset table.",
 		[]string{"page_size"}, nil,
 	)
@@ -55,11 +55,11 @@ var (
 )
 // ScrapeInfoSchemaInnodbTablespaces collects from `information_schema.innodb_sys_tablespaces`.
 func ScrapeInfoSchemaInnodbCompressionReset(db *sql.DB, ch chan<- prometheus.Metric) error {
-	CmpResetRows, err := db.Query(innodbCmpResetQuery)
+	cmpResetRows, err := db.Query(innodbCmpResetQuery)
 	if err != nil {
 		return err
 	}
-	defer CmpResetRows.Close()
+	defer cmpResetRows.Close()
 
 	var (
 		page_size     	float64
@@ -70,8 +70,8 @@ func ScrapeInfoSchemaInnodbCompressionReset(db *sql.DB, ch chan<- prometheus.Met
 		uncompress_time float64
 	)
 
-	for CmpResetRows.Next() {
-		err = CmpResetRows.Scan(
+	for cmpResetRows.Next() {
+		err = cmpResetRows.Scan(
 			&page_size,
 			&compress_ops,
 			&compress_ops_ok,
