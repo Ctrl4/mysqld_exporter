@@ -131,7 +131,7 @@ var (
 		"Table from where to collect heartbeat data",
 	)
 	collectInnodbCompression = flag.Bool(
-		"collect.info_schema.innodb_cmps", false,
+		"collect.info_schema.innodb_cmp", false,
 		"Collect content from information_schema.innodb_cmp",
 	)
 )
@@ -199,6 +199,7 @@ func main() {
 		TableSchema:          *collectTableSchema,
 		InnodbTablespaces:    *collectInnodbTablespaces,
 		InnodbMetrics:        *collectInnodbMetrics,
+		InnodbCompression:    *collectInnodbCompression,
 		GlobalStatus:         *collectGlobalStatus,
 		GlobalVariables:      *collectGlobalVariables,
 		SlaveStatus:          *collectSlaveStatus,
@@ -220,7 +221,6 @@ func main() {
 		Heartbeat:            *collectHeartbeat,
 		HeartbeatDatabase:    *collectHeartbeatDatabase,
 		HeartbeatTable:       *collectHeartbeatTable,
-		InnodbCompression:    *collectInnodbCompression,
 	}
 
 	c := collector.New(dsn, collect)
