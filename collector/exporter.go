@@ -37,6 +37,7 @@ type Collect struct {
 	TableSchema          bool
 	InnodbTablespaces    bool
 	InnodbMetrics        bool
+	InnodbCompression	 bool
 	GlobalStatus         bool
 	GlobalVariables      bool
 	SlaveStatus          bool
@@ -225,6 +226,14 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) {
 			e.scrapeErrors.WithLabelValues("collect.info_schema.innodb_sys_tablespaces").Inc()
 		}
 		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.info_schema.innodb_sys_tablespaces")
+	}
+	if e.collect.InnodbCompression {
+		scrapeTime = time.Now()
+		if err = ScrapeInfoSchemaInnodbTablespaces(db, ch); err != nil {
+			log.Errorln("Error scraping for collect.info_schema.innodb_cmp:", err)
+			e.scrapeErrors.WithLabelValues("collect.info_schema.innodb_cmp").Inc()
+		}
+		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.info_schema.innodb_cmp")
 	}
 	if e.collect.InnodbMetrics {
 		if err = ScrapeInnodbMetrics(db, ch); err != nil {
