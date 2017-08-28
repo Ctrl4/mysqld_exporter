@@ -32,33 +32,34 @@ var (
 
 // Collect defines which metrics we should collect
 type Collect struct {
-	SlowLogFilter        bool
-	Processlist          bool
-	TableSchema          bool
-	InnodbTablespaces    bool
-	InnodbMetrics        bool
-	InnodbCompression	 bool
-	GlobalStatus         bool
-	GlobalVariables      bool
-	SlaveStatus          bool
-	AutoIncrementColumns bool
-	BinlogSize           bool
-	PerfTableIOWaits     bool
-	PerfIndexIOWaits     bool
-	PerfTableLockWaits   bool
-	PerfEventsStatements bool
-	PerfEventsWaits      bool
-	PerfFileEvents       bool
-	PerfFileInstances    bool
-	UserStat             bool
-	ClientStat           bool
-	TableStat            bool
-	QueryResponseTime    bool
-	EngineTokudbStatus   bool
-	EngineInnodbStatus   bool
-	Heartbeat            bool
-	HeartbeatDatabase    string
-	HeartbeatTable       string
+	SlowLogFilter        	bool
+	Processlist          	bool
+	TableSchema          	bool
+	InnodbTablespaces    	bool
+	InnodbMetrics        	bool
+	InnodbCompression	 	bool
+	InnodbCompressionReset	bool
+	GlobalStatus         	bool
+	GlobalVariables      	bool
+	SlaveStatus          	bool
+	AutoIncrementColumns 	bool
+	BinlogSize           	bool
+	PerfTableIOWaits     	bool
+	PerfIndexIOWaits     	bool
+	PerfTableLockWaits   	bool
+	PerfEventsStatements 	bool
+	PerfEventsWaits      	bool
+	PerfFileEvents       	bool
+	PerfFileInstances    	bool
+	UserStat             	bool
+	ClientStat           	bool
+	TableStat            	bool
+	QueryResponseTime    	bool
+	EngineTokudbStatus   	bool
+	EngineInnodbStatus   	bool
+	Heartbeat            	bool
+	HeartbeatDatabase    	string
+	HeartbeatTable       	string
 }
 
 // Exporter collects MySQL metrics. It implements prometheus.Collector.
