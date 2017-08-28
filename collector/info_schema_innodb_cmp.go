@@ -6,6 +6,8 @@ import (
 	"database/sql"
 
 	"github.com/prometheus/client_golang/prometheus"
+
+	"strconv"
 )
 
 const innodbCmpQuery = `
@@ -81,7 +83,8 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 			return err
 		}
 	ch <- prometheus.MustNewConstMetric(
-		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue, page_size, string(page_size),
+		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue, page_size,
+		strconv.ParseFloat(page_size,64),
 	)
 /*
 	ch <- prometheus.MustNewConstMetric(
