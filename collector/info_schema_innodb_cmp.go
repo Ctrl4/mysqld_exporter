@@ -23,7 +23,7 @@ var (
 	infoSchemaInnodbCmpPageSize = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "page_size"),
 		"InnoDB page size for innodb_cmp table.",
-		[]string{"schema","table","column"}, nil,
+//		[]string{"schema","table","column"}, nil,
 	)
 	infoSchemaInnodbCmpCompressOps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_ops"),
