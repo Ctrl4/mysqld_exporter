@@ -229,7 +229,7 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) {
 	}
 	if e.collect.InnodbCompression {
 		scrapeTime = time.Now()
-		if err = ScrapeInfoSchemaInnodbTablespaces(db, ch); err != nil {
+		if err = ScrapeInfoSchemaInnodbCompression(db, ch); err != nil {
 			log.Errorln("Error scraping for collect.info_schema.innodb_cmp:", err)
 			e.scrapeErrors.WithLabelValues("collect.info_schema.innodb_cmp").Inc()
 		}
