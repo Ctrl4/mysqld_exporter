@@ -60,12 +60,12 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 	defer cmpRows.Close()
 
 	var (
-		page_size     	uint32
-		compress_ops  	uint32
-		compress_ops_ok	uint32
-		compress_time	uint32
-		uncompress_ops	uint32
-		uncompress_time uint32
+		page_size     	float64
+		compress_ops  	float64
+		compress_ops_ok	float64
+		compress_time	float64
+		uncompress_ops	float64
+		uncompress_time float64
 	)
 
 	for cmpRows.Next() {
@@ -80,7 +80,10 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 		if err != nil {
 			return err
 		}
-
+	ch <- prometheus.MustNewConstMetric(
+		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue,page_size,
+		schema, table, column,
+	)
 /*
 	ch <- prometheus.MustNewConstMetric(
 				infoSchemaInnodbCmpPageSize, prometheus.GaugeValue,float64(page_size),
