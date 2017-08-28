@@ -81,8 +81,8 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 			return err
 		}
 	ch <- prometheus.MustNewConstMetric(
-		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue,page_size,
-		"information_schema", "innodb_cmp", "page_size"
+		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue,
+		"information_schema", "innodb_cmp",
 	)
 /*
 	ch <- prometheus.MustNewConstMetric(
