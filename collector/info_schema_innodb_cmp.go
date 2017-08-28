@@ -23,7 +23,7 @@ var (
 	infoSchemaInnodbCmpPageSize = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "page_size"),
 		"InnoDB page size for innodb_cmp table.",
-		[]string{"column"}, nil,
+		[]string{"page size"}, nil,
 	)
 	infoSchemaInnodbCmpCompressOps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_ops"),
@@ -81,7 +81,7 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 			return err
 		}
 	ch <- prometheus.MustNewConstMetric(
-		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue, page_size, "valor",
+		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue, page_size, string(page_size),
 	)
 /*
 	ch <- prometheus.MustNewConstMetric(
