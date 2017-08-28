@@ -35,22 +35,22 @@ var (
 	infoSchemaInnodbCmpCompressOpsOk = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_ops_ok"),
 		"InnoDB compress operations ok for innodb_cmp table.",
-		[]string{"schema","table","column"}, nil,
+		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpCompressTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_time"),
 		"InnoDB compression time for innodb_cmp table.",
-		[]string{"schema","table","column"}, nil,
+		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpUncompressOps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "uncompress_ops"),
 		"InnoDB unoncompress operations for innodb_cmp table.",
-		[]string{"schema","table","column"}, nil,
+		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpUncompressTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "uncompress_time"),
 		"InnoDB uncompression time for innodb_cmp table.",
-		[]string{"schema","table","column"}, nil,
+		[]string{"page_size"}, nil,
 	)
 )
 // ScrapeInfoSchemaInnodbTablespaces collects from `information_schema.innodb_sys_tablespaces`.
@@ -90,27 +90,22 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 		infoSchemaInnodbCmpCompressOps, prometheus.GaugeValue, compress_ops,
 		strconv.FormatFloat(page_size,'f', -1, 64),
 		)
-/*
 	ch <- prometheus.MustNewConstMetric(
-				infoSchemaInnodbCmpCompressOps, prometheus.GaugeValue,float64(compress_ops),
-				"information_schema", "innodb_cmp",
+		infoSchemaInnodbCmpCompressOpsOk, prometheus.GaugeValue,compress_ops_ok,
+	)
+		strconv.FormatFloat(page_size,'f', -1, 64),
+	ch <- prometheus.MustNewConstMetric(
+		infoSchemaInnodbCmpCompressTime, prometheus.GaugeValue,compress_time,
+	)
+		strconv.FormatFloat(page_size,'f', -1, 64),
+	ch <- prometheus.MustNewConstMetric(
+		infoSchemaInnodbCmpUncompressOps, prometheus.GaugeValue,uncompress_ops,
+		strconv.FormatFloat(page_size,'f', -1, 64),
 		)
 	ch <- prometheus.MustNewConstMetric(
-				infoSchemaInnodbCmpCompressOpsOk, prometheus.GaugeValue,float64(compress_ops_ok),
-				"information_schema", "innodb_cmp",
+		infoSchemaInnodbCmpUncompressTime, prometheus.GaugeValue,uncompress_time,
+		strconv.FormatFloat(page_size,'f', -1, 64),
 		)
-	ch <- prometheus.MustNewConstMetric(
-				infoSchemaInnodbCmpCompressTime, prometheus.GaugeValue,float64(compress_time),
-				"information_schema", "innodb_cmp",
-		)
-	ch <- prometheus.MustNewConstMetric(
-				infoSchemaInnodbCmpUncompressOps, prometheus.GaugeValue,float64(uncompress_ops),
-				"information_schema", "innodb_cmp",
-		)
-	ch <- prometheus.MustNewConstMetric(
-				infoSchemaInnodbCmpUncompressTime, prometheus.GaugeValue,float64(uncompress_time),
-				"information_schema", "innodb_cmp",
-		)*/
 	}
 
 	return nil
