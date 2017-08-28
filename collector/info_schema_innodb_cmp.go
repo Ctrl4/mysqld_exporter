@@ -92,12 +92,12 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 		)
 	ch <- prometheus.MustNewConstMetric(
 		infoSchemaInnodbCmpCompressOpsOk, prometheus.GaugeValue,compress_ops_ok,
-	)
 		strconv.FormatFloat(page_size,'f', -1, 64),
+	)
 	ch <- prometheus.MustNewConstMetric(
 		infoSchemaInnodbCmpCompressTime, prometheus.GaugeValue,compress_time,
-	)
 		strconv.FormatFloat(page_size,'f', -1, 64),
+	)
 	ch <- prometheus.MustNewConstMetric(
 		infoSchemaInnodbCmpUncompressOps, prometheus.GaugeValue,uncompress_ops,
 		strconv.FormatFloat(page_size,'f', -1, 64),
