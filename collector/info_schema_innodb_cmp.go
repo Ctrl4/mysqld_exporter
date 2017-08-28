@@ -23,32 +23,32 @@ var (
 	infoSchemaInnodbCmpPageSize = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "page_size"),
 		"InnoDB page size for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 	infoSchemaInnodbCmpCompressOps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_ops"),
 		"InnoDB compress operations for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 	infoSchemaInnodbCmpCompressOpsOk = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_ops_ok"),
 		"InnoDB compress operations ok for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 	infoSchemaInnodbCmpCompressTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "compress_time"),
 		"InnoDB compression time for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 	infoSchemaInnodbCmpUncompressOps = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "uncompress_ops"),
 		"InnoDB unoncompress operations for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 	infoSchemaInnodbCmpUncompressTime = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, informationSchema, "uncompress_time"),
 		"InnoDB uncompression time for innodb_cmp table.",
-		[]string("information_schema","innodb_cmp")
+		[]string{"information_schema","innodb_cmp"}
 	)
 )
 // ScrapeInfoSchemaInnodbTablespaces collects from `information_schema.innodb_sys_tablespaces`.
