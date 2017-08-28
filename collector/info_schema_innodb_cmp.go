@@ -60,6 +60,7 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 	defer cmpRows.Close()
 
 	var (
+		column			string
 		page_size     	float64
 		compress_ops  	float64
 		compress_ops_ok	float64
@@ -82,7 +83,7 @@ func ScrapeInfoSchemaInnodbCompression(db *sql.DB, ch chan<- prometheus.Metric) 
 		}
 	ch <- prometheus.MustNewConstMetric(
 		infoSchemaInnodbCmpPageSize, prometheus.GaugeValue,page_size,
-		schema, table, column,
+		"information_schema", "innodb_cmp", column,
 	)
 /*
 	ch <- prometheus.MustNewConstMetric(
