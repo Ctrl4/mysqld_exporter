@@ -21,7 +21,7 @@ const innodbCmpQuery = `
 
 var (
 	infoSchemaInnodbCmpPageSize = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "innodb_cmp.page_size"),
+		prometheus.BuildFQName(namespace, informationSchema, "page_size"),
 		"InnoDB page size for innodb_cmp table.",
 		[]string{"column"}, nil,
 	)
