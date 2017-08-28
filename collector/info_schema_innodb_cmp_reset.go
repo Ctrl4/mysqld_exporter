@@ -43,12 +43,12 @@ var (
 		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpResetUncompressOps = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "uncompress_ops"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_reset_uncompress_ops"),
 		"InnoDB unoncompress operations for innodb_cmp_reset table.",
 		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpResetUncompressTime = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "uncompress_time"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_reset_uncompress_time"),
 		"InnoDB uncompression time for innodb_cmp_reset table.",
 		[]string{"page_size"}, nil,
 	)
