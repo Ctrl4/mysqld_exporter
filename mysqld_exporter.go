@@ -134,6 +134,10 @@ var (
 		"collect.info_schema.innodb_cmp", false,
 		"Collect content from information_schema.innodb_cmp",
 	)
+	collectInnodbCompressionReset = flag.Bool(
+		"collect.info_schema.innodb_cmp_reset", false,
+		"Collect content from information_schema.innodb_cmp_reset",
+	)
 )
 
 // landingPage contains the HTML served at '/'.

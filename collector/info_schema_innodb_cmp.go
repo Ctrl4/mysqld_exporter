@@ -23,22 +23,22 @@ const innodbCmpQuery = `
 
 var (
 	infoSchemaInnodbCmpPageSize = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "page_size"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_page_size"),
 		"InnoDB page size for innodb_cmp table.",
 		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpCompressOps = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "compress_ops"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_compress_ops"),
 		"InnoDB compress operations for innodb_cmp table.",
 		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpCompressOpsOk = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "compress_ops_ok"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_compress_ops_ok"),
 		"InnoDB compress operations ok for innodb_cmp table.",
 		[]string{"page_size"}, nil,
 	)
 	infoSchemaInnodbCmpCompressTime = prometheus.NewDesc(
-		prometheus.BuildFQName(namespace, informationSchema, "compress_time"),
+		prometheus.BuildFQName(namespace, informationSchema, "cmp_compress_time"),
 		"InnoDB compression time for innodb_cmp table.",
 		[]string{"page_size"}, nil,
 	)

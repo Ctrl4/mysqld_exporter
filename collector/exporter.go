@@ -235,6 +235,14 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) {
 		}
 		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.info_schema.innodb_cmp")
 	}
+	if e.collect.InnodbCompressionReset {
+		scrapeTime = time.Now()
+		if err = ScrapeInfoSchemaInnodbCompressionReset(db, ch); err != nil {
+			log.Errorln("Error scraping for collect.info_schema.innodb_cmp_reset:", err)
+			e.scrapeErrors.WithLabelValues("collect.info_schema.innodb_cmp_reset").Inc()
+		}
+		ch <- prometheus.MustNewConstMetric(scrapeDurationDesc, prometheus.GaugeValue, time.Since(scrapeTime).Seconds(), "collect.info_schema.innodb_cmp")
+	}
 	if e.collect.InnodbMetrics {
 		if err = ScrapeInnodbMetrics(db, ch); err != nil {
 			log.Errorln("Error scraping for collect.info_schema.innodb_metrics:", err)
